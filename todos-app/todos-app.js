@@ -48,7 +48,8 @@ h2.textContent = `You have ${cnt} todos left`;
 // 2. Setup filters (searchText) and wire up a new filter input to change it
 // 3. Create a renderTodos function to render and rerender the latest filtered data
 const filters = {
-    searchText: ''
+    searchText: '',
+    hideCompleted: false
 }
 const replaceTodo = {
     wasText: '',
@@ -56,12 +57,16 @@ const replaceTodo = {
     isDone: false
 }
 const renderTodos =  function (todos, filters){
-    const filterTodos = todos.filter( function (todo){
+    let filterTodos = todos.filter( function (todo){
 /*         if (filters.searchText === ''){
             return todos;
         }else{ */
             return todo.todo.toLowerCase().includes(filters.searchText.toLowerCase());
         //}
+    });
+    
+    filterTodos = filterTodos.filter(function(todo){
+        return !filters.hideCompleted || !todo.isDone;
     });
 
     document.querySelector('#todo-list').innerHTML = '';
@@ -78,6 +83,12 @@ const renderTodos =  function (todos, filters){
     filterTodos.forEach( function(todo){    
         const todoEl = document.createElement('p');
         todoEl.textContent = todo.todo.concat((todo.isDone) ? ' *' : '');
+/*         if (filters.hideCompleted){
+            if (!todo.isDone)
+              todoEl.textContent = todo.todo
+        } else {
+            todoEl.textContent = todo.todo.concat((todo.isDone) ? ' *' : '');
+        } */
         document.querySelector('#todo-list').appendChild(todoEl);
     })
 } 
@@ -132,6 +143,11 @@ document.querySelector('#todo-form').addEventListener('submit', function(e){
         editReplaceTodo(todos, replaceTodo)
     }
 });
+
+document.querySelector('#still-todo').addEventListener('change', function(e){
+    filters.hideCompleted =  e.target.checked;   //document.querySelector('#still-todo').checked;
+    renderTodos(todos, filters);
+});
 /* 
 const ps = document.querySelectorAll('p')
 ps.forEach(function (p){
@@ -146,3 +162,8 @@ ps.forEach(function (p){
 // 3. Add a new item to the todos array with that text data (completed value of false)
 // 4. Rerender the application
 // 5. Clear the input field value
+//-------------------------------------------------------------
+// 1. Create a checkbox and setup event listener ->"Hide completed"
+// 2. Create new hideCompleted filter (default false)
+// 3. Update hideCompleted an rerender list on checkbox change
+// 4.  Setup renderTodos to remove completed items

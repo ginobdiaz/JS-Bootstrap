@@ -100,6 +100,10 @@ document.querySelector('#search-text').addEventListener('input', function(e) {
 document.querySelector('#for-fun').addEventListener('change', function(e){
     e.target.checked 
 });
+
+document.querySelector('#filter-by').addEventListener('change', function(e){
+   console.log(e.target.value);
+});
 /*document.querySelector('#name-form').addEventListener('submit', function(e){
     e.preventDefault(); //stops the form default behavior
     //dom element for the input use the name attribute to get value
