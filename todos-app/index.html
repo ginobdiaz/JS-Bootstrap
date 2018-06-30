@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Page Title</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+   
+</head>
+<body>
+    <h1>TODO</h1>
+    <h2>I Live By My Todos!</h2>
+    <div><input type="text" id="search-todo" placeholder="search todo"/></div>
+    <div><input type="text" id="focus2-todo" readonly=true placeholder="edit this todo"/><input type="text" id="replace-todo" placeholder="replace todo with"/><button id="button-replace-todo">Replace Todo</button></div>
+    
+    <div id="todo-list">
+
+    </div>
+
+    <!-- style="display: none;" -->
+    <form id="todo-form">
+        <div><input type="text" id="focus-todo" name="update-todo" placeholder="new todo"/>
+        <input type="checkbox" id="edit-done" name="is-done" value="0">Completed<br></div>
+        <div style="margin-top: 10px;"><button id="submit-todo">Add Todo</button></div>
+    </form>
+    <!-- <div><button id="add-todo">Test TODO</button></div> -->
+    <script src="todos-app.js"></script>    
+</body>
+</html>
