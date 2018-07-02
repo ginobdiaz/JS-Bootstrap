@@ -1,6 +1,6 @@
 // DOM - Document Object Model
 
-const todos = [{
+/* const todos = [{
     todo: 'Order cat food',
     isDone: false
 },
@@ -20,6 +20,18 @@ const todos = [{
     todo: 'Exercise body',
     isDone: false
 }]
+ */
+// 1. Delete dummy data
+// 2. Read and parse the data when the app starts up
+// 3. Stringify and write the data when new data is added
+let todos = [];
+
+// Check for existing saved data
+const todosJSON = localStorage.getItem('todos');
+
+if (todosJSON !== null){
+    todos =JSON.parse(todosJSON);
+}
 
 /*
 const h2 = document.querySelector('h2');
@@ -56,6 +68,11 @@ const replaceTodo = {
     replaceText: '',
     isDone: false
 }
+const resetTodoInput = function(){
+    document.querySelector('#focus-todo').value='';
+    document.querySelector('#edit-done').checked=false;
+    document.querySelector('#submit-todo').innerHTML = 'Add Todo';
+}
 const renderTodos =  function (todos, filters){
     let filterTodos = todos.filter( function (todo){
 /*         if (filters.searchText === ''){
@@ -76,14 +93,12 @@ const renderTodos =  function (todos, filters){
         document.querySelector('#edit-done').checked = filterTodos[0].isDone;
         document.querySelector('#submit-todo').innerHTML = 'Update Todo';
     } else {
-        document.querySelector('#focus-todo').value='';
-        document.querySelector('#edit-done').checked=false;
-        document.querySelector('#submit-todo').innerHTML = 'Add Todo';
+        resetTodoInput();
     }
     filterTodos.forEach( function(todo){    
         const todoEl = document.createElement('p');
         todoEl.textContent = todo.todo.concat((todo.isDone) ? ' *' : '');
-/*         if (filters.hideCompleted){
+      /*if (filters.hideCompleted){
             if (!todo.isDone)
               todoEl.textContent = todo.todo
         } else {
@@ -91,6 +106,7 @@ const renderTodos =  function (todos, filters){
         } */
         document.querySelector('#todo-list').appendChild(todoEl);
     })
+    document.querySelector('#count-todos').innerHTML = `There ${(filterTodos.length > 1) ? 'are' : 'is' } ${filterTodos.length} ${(filterTodos.length > 1) ? 'todos' : 'todo' }.`
 } 
 const editReplaceTodo = function (todos, replaceTodo) {
 
@@ -102,14 +118,21 @@ const editReplaceTodo = function (todos, replaceTodo) {
     document.querySelector('#todo-list').innerHTML = '';
     document.querySelector('#search-todo').value = '';
     filters.searchText = '';
+
     renderTodos(todos, filters);
+
+    localStorage.setItem('todos',JSON.stringify(todos));
 }
 
 const addReplaceTodo = function (todos, replaceTodo){
     const newTodo = {todo: replaceTodo.replaceText, isDone: replaceTodo.isDone}
     todos.push(newTodo);
     filters.searchText = '';
+    document.querySelector('#focus-todo').value='';
     renderTodos(todos, filters);
+
+    localStorage.setItem('todos',JSON.stringify(todos));
+
 }
 
 //const focusOnTodo = function 
@@ -126,6 +149,9 @@ document.querySelector('#replace-todo').addEventListener('input', function (e) {
         replaceTodo.replaceText = e.target.value;
 });
 
+document.querySelector('#focus-todo').addEventListener('input', function (e) {
+    if (e.target.value.length === 0) resetTodoInput();
+});
 /* document.querySelector('#submit-todo').addEventListener('click', function (e) {
     editReplaceTodo(todos, replaceTodo);
 }) */

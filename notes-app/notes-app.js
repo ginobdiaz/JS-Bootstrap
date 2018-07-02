@@ -15,7 +15,7 @@ const newPar = document.createElement('p')
 newPar.textContent = 'This is a new element from JS!'
 document.querySelector('body').appendChild(newPar); */
 
-const notes =[{
+/* const notes =[{
     title: 'My next trip',
     body: 'I would like to go to Spin'
 }, {
@@ -24,7 +24,10 @@ const notes =[{
 },{
     title: 'Office modification',
     body: 'Get a new seat'
-}]
+}]  */
+//for the localStorage stuff
+let notes = getSavedNotes();
+
 /*
 //the 'click' is the event
 //the function(e) runs when event happens.
@@ -75,22 +78,45 @@ const filters = {
     searchText: ''
 }
 
-const renderNotes = function (notes, filters){
-    const filteredNotes = notes.filter( function (note){
-        return note.title.toLowerCase().includes(filters.searchText.toLowerCase())
-    });
-    //console.log(filteredNotes);  see if it works
+//localStorage.setItem('location', 'Riverside');
+//to readback localStorage .getItem
+//console.log(localStorage.getItem('location'));
+//to delete localStorage items.
+//localStorage.removeItem('location')
 
-    document.querySelector('#notes').innerHTML = '';
+//clear will remove ALL data regardless of key values
+//localStorage.clear();
 
-    filteredNotes.forEach(function (note){
-        const noteEl = document.createElement('p');
-        noteEl.textContent = note.title;
-        document.querySelector('#notes').appendChild(noteEl);
-    })
+//Stores object to JSON string
+/* const user = {
+     name: 'Gino',
+     age: 57
 }
+const userJSON= JSON.stringify(user);
+console.log(userJSON)
+localStorage.setItem('user', userJSON);
+ */
+
+//Read JSON string to object
+/* const userJSON = localStorage.getItem('user');
+const user = JSON.parse(userJSON);
+console.log(`${user.name} is ${user.age} years old!`)
+ */
+
+
+
+
 
 renderNotes(notes, filters)
+
+document.querySelector('#create-note').addEventListener('click', function(e){
+    notes.push({
+        title: '',
+        body: ''
+    })
+    saveNotes(notes);
+    renderNotes(notes, filters);
+});
 
 document.querySelector('#search-text').addEventListener('input', function(e) {
     filters.searchText = e.target.value;
