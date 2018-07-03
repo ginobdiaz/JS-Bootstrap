@@ -24,14 +24,8 @@
 // 1. Delete dummy data
 // 2. Read and parse the data when the app starts up
 // 3. Stringify and write the data when new data is added
-let todos = [];
+let todos = loadTodos();
 
-// Check for existing saved data
-const todosJSON = localStorage.getItem('todos');
-
-if (todosJSON !== null){
-    todos =JSON.parse(todosJSON);
-}
 
 /*
 const h2 = document.querySelector('h2');
@@ -68,11 +62,7 @@ const replaceTodo = {
     replaceText: '',
     isDone: false
 }
-const resetTodoInput = function(){
-    document.querySelector('#focus-todo').value='';
-    document.querySelector('#edit-done').checked=false;
-    document.querySelector('#submit-todo').innerHTML = 'Add Todo';
-}
+
 const renderTodos =  function (todos, filters){
     let filterTodos = todos.filter( function (todo){
 /*         if (filters.searchText === ''){
