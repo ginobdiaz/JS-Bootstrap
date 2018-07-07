@@ -47,6 +47,11 @@ const renderTodos = function (todos, filters) {
         const btnDelEl = document.createElement('button');
         btnDelEl.textContent = 'X';
         todoEl.appendChild(btnDelEl);
+        btnDelEl.addEventListener('click', function(){
+            removeTodo(todo.id);
+            saveTodos(todos);
+            renderTodos(todos, filters);
+        })
 
         //todo box 
         const textEl = document.createElement('span');
@@ -58,6 +63,11 @@ const renderTodos = function (todos, filters) {
         chkbxEl.setAttribute('type', 'checkbox');
         chkbxEl.checked = todo.isDone;
         todoEl.appendChild(chkbxEl);
+        chkbxEl.addEventListener('change', function(){
+            checkDoneTodo(todo.id);
+            saveTodos(todos);
+            renderTodos(todos, filters);
+        });
 
 
         /*if (filters.hideCompleted){
@@ -84,7 +94,7 @@ const editReplaceTodo = function (todos, replaceTodo) {
 
     renderTodos(todos, filters);
 
-    localStorage.setItem('todos', JSON.stringify(todos));
+    saveTodos(todos);
 }
 
 const addReplaceTodo = function (todos, replaceTodo) {
@@ -94,6 +104,33 @@ const addReplaceTodo = function (todos, replaceTodo) {
     document.querySelector('#focus-todo').value = '';
     renderTodos(todos, filters);
 
-    localStorage.setItem('todos', JSON.stringify(todos));
+    //localStorage.setItem('todos', JSON.stringify(todos));
+    saveTodos(todos);
+
+}
+
+// Remove a todo
+const removeTodo = function(id){
+    const byeIndex = todos.findIndex(function(todo){
+        return todo.id === id;
+    })
+
+    if (byeIndex > -1){
+        todos.splice(byeIndex,1);
+    }
+}
+// Check and uncheck a todo
+const checkDoneTodo = function(id){
+    const byeIndex = todos.findIndex(function(todo){
+        return todo.id === id;
+    })
+
+    if (byeIndex > -1){
+        todos[byeIndex].isDone = !todos[byeIndex].isDone;
+    }
+}
+// Saving todos one to do at a time
+const saveTodos =  function(todos){
+    localStorage.setItem('todos',JSON.stringify(todos));
 
 }
