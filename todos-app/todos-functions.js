@@ -25,6 +25,8 @@ const renderTodos = function (todos, filters) {
         //}
     });
 
+//debugger  //pauses pgm
+
     filterTodos = filterTodos.filter(function (todo) {
         return !filters.hideCompleted || !todo.isDone;
     });
@@ -39,8 +41,25 @@ const renderTodos = function (todos, filters) {
         resetTodoInput();
     }
     filterTodos.forEach(function (todo) {
-        const todoEl = document.createElement('p');
-        todoEl.textContent = todo.todo.concat((todo.isDone) ? ' *' : '');
+        const todoEl = document.createElement('div');
+
+        //remove button
+        const btnDelEl = document.createElement('button');
+        btnDelEl.textContent = 'X';
+        todoEl.appendChild(btnDelEl);
+
+        //todo box 
+        const textEl = document.createElement('span');
+        textEl.textContent = todo.todo.concat((todo.isDone) ? ' *' : '');
+        todoEl.appendChild(textEl);
+
+        //check box 
+        const chkbxEl = document.createElement('input');
+        chkbxEl.setAttribute('type', 'checkbox');
+        chkbxEl.checked = todo.isDone;
+        todoEl.appendChild(chkbxEl);
+
+
         /*if (filters.hideCompleted){
               if (!todo.isDone)
                 todoEl.textContent = todo.todo
@@ -69,7 +88,7 @@ const editReplaceTodo = function (todos, replaceTodo) {
 }
 
 const addReplaceTodo = function (todos, replaceTodo) {
-    const newTodo = { todo: replaceTodo.replaceText, isDone: replaceTodo.isDone }
+    const newTodo = { id: uuidv4(), todo: replaceTodo.replaceText, isDone: replaceTodo.isDone }
     todos.push(newTodo);
     filters.searchText = '';
     document.querySelector('#focus-todo').value = '';
