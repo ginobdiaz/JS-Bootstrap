@@ -141,3 +141,60 @@ document.querySelector('#filter-by').addEventListener('change', function(e){
     //clears the input box
     e.target.elements.firstName.value = '';
 });*/
+
+window.addEventListener('storage', function (e) {
+    if (e.key === 'notes'){
+        notes = JSON.parse(e.newValue);
+        renderNotes(notes,filters); 
+/*        const note = notes.find(function (note) {
+            return note.id === noteID
+        })
+        if (note === undefined) {
+            location.assign('/index.html')
+        }
+
+
+        titleElement.value = note.title;
+        bodyElement.value = note.body;*/        
+    }
+});
+
+/*
+
+// Unix Epoch = January 1, 1970 00:00:00
+// represented as number where 0 = Unix Epoch
+// positive is from that time foward
+// negative is going backawrd from UE -60000 is 1 min in millisecond 
+// now.getTime() gives you a timestamp.
+console.log(new Date().getTime())
+//const now = new Date();
+const now = new Date('August 18, 1991 08:18:00');
+console.log(now.toString());
+
+console.log(`Year: ${now.getFullYear()}`)
+console.log(`Month: ${now.getMonth()}`)
+console.log(`Day of month: ${now.getDate()}`)
+console.log(`Hour: ${now.getHours()}`)
+console.log(`Minutes: ${now.getMinutes()}`)
+console.log(`Seconds: ${now.getSeconds()}`)
+
+const timestamp = now.getTime();
+const myDate = new Date(timestamp);
+console.log(myDate.getFullYear())
+
+//1. create two dates in the past
+//2. Get timestamp for both
+//3. Sort which is first and print its time (use toString)
+const dt01 = new Date('1962-06-26 11:15:00')
+const dt02 = new Date('2018-06-26 10:30:00')
+console.log(dt01.getTime());
+console.log(dt02.getTime());
+const olderDt = (dt01.getTime() > dt02.getTime()) ? dt02.toString() : dt01.toString();
+console.log(`This date ${olderDt} is older than the other.`   )
+*/
+
+//Now let's use the moment lib
+const now = moment();
+console.log(now.toString())
+now.minute(16);  //replaces the minute section
+console.log(now.toString())
