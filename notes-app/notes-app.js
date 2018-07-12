@@ -75,7 +75,8 @@ document.querySelector('#search-text').addEventListener('input', function(e) {
 // h1.application#title (tag + class + id)
 
 const filters = {
-    searchText: ''
+    searchText: '',
+    sortBy: 'byEdited'
 }
 
 //localStorage.setItem('location', 'Riverside');
@@ -111,10 +112,13 @@ renderNotes(notes, filters)
 
 document.querySelector('#create-note').addEventListener('click', function(e){
     const uid = uuidv4();
+    const createTimeStamp = moment().valueOf();
     notes.push({
         id: uid,
         title: '',
-        body: ''
+        body: '',
+        createdAt: createTimeStamp,
+        updatedAt: createTimeStamp
     })
     saveNotes(notes);
     //renderNotes(notes, filters);
@@ -132,7 +136,9 @@ document.querySelector('#for-fun').addEventListener('change', function(e){
 });
 
 document.querySelector('#filter-by').addEventListener('change', function(e){
-   console.log(e.target.value);
+   //console.log(e.target.value);
+   filters.sortBy = e.target.value;
+   renderNotes(notes, filters);
 });
 /*document.querySelector('#name-form').addEventListener('submit', function(e){
     e.preventDefault(); //stops the form default behavior
@@ -193,8 +199,26 @@ const olderDt = (dt01.getTime() > dt02.getTime()) ? dt02.toString() : dt01.toStr
 console.log(`This date ${olderDt} is older than the other.`   )
 */
 
+/*
 //Now let's use the moment lib
 const now = moment();
 console.log(now.toString())
-now.minute(16);  //replaces the minute section
+
+//now.minute(16);  //replaces the minute section
+now.add(1, 'year').subtract(20,'days');
 console.log(now.toString())
+
+console.log(now.format('MMMM Do, YYYY'))
+console.log(now.fromNow())
+
+const nowTimeStamp = now.valueOf();
+console.log(moment(nowTimeStamp).toString());
+*/
+
+//BDay moment
+const bday = moment();
+
+bday.year(1960);
+bday.month("Aug");
+bday.set('date',18);
+console.log(bday.format('dddd, MMM D, YYYY'))
