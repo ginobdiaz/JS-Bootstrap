@@ -1,4 +1,10 @@
-// arrow functions can't use the arguments 
+// arrow functions can't use the multiple arguments not explicitly define
+// arrow functions does not bind 
+/*
+const add = () =>{
+    return arguments[0] + arguments[2]
+}  //fails
+*/
 const add = function (a, b){
     //console.log(arguments)
     return arguments[0] + arguments[2]
@@ -18,8 +24,8 @@ console.log(car.getSummary())
 */
 const car2 = {
     color: 'Red',
-    getSummary() {
-        return `The care is ${this.color}`  // the this should be good. notice no colon.
+    getSummary() {                          // method definetion syntax
+        return `The care is ${this.color}`  // the 'this' should be good. notice no colon.
     }
 }
 console.log(car2.getSummary())
@@ -27,7 +33,7 @@ console.log(car2.getSummary())
 const car = {
     color: 'Red',
     getSummary: () => {
-        return `The care is ${this.color}`  // the this will be undefined
+        return `The care is ${this.color}`  // the 'this' will be undefined
     }
 }
 console.log(car.getSummary())

@@ -30,35 +30,35 @@ let notes = getSavedNotes();
 
 /*
 //the 'click' is the event
-//the function(e) runs when event happens.
-document.querySelector('button').addEventListener('click', function(e){
+//the (e)=> runs when event happens.
+document.querySelector('button').addEventListener('click', (e)=>{
     console.log('Did this work?')
     //console.log(e) helps to show attributes and methods
     // found target attribute and you can change some aspects for them
     e.target.textContent = 'OUCH! NOT THAT HARD!!!'
 })
-document.querySelectorAll('button')[1].addEventListener('click', function(e){
+document.querySelectorAll('button')[1].addEventListener('click', (e)=>{
     console.log('We clicked to remove notes!')
 })
 */
 
-document.querySelector('#create-note').addEventListener('click', function(e){
+document.querySelector('#create-note').addEventListener('click', (e)=>{
     console.log('Did this work?')
     e.target.textContent = 'OUCH! NOT THAT HARD!!!'
 })
-/* document.querySelector('#remove-notes').addEventListener('click', function(e){
+/* document.querySelector('#remove-notes').addEventListener('click', (e)=>{
     console.log('We clicked to remove notes!')
     document.querySelectorAll('.note').forEach(function(note){
         note.remove();
     })
 }) */
 
-document.querySelector('#search-text').addEventListener('input', function(e) {
+document.querySelector('#search-text').addEventListener('input', (e)=> {
     console.log(e.target.value)
     // 'input' fires each time you type.
 });
 
-/* document.querySelector('#search-text').addEventListener('change', function(e) {
+/* document.querySelector('#search-text').addEventListener('change', (e)=> {
     console.log(e.target.value)
     //happens only when you lose focus
 }); */
@@ -110,7 +110,7 @@ console.log(`${user.name} is ${user.age} years old!`)
 
 renderNotes(notes, filters)
 
-document.querySelector('#create-note').addEventListener('click', function(e){
+document.querySelector('#create-note').addEventListener('click', (e)=>{
     const uid = uuidv4();
     const createTimeStamp = moment().valueOf();
     notes.push({
@@ -126,21 +126,21 @@ document.querySelector('#create-note').addEventListener('click', function(e){
     console.log(location.hash);
 });
 
-document.querySelector('#search-text').addEventListener('input', function(e) {
+document.querySelector('#search-text').addEventListener('input', (e)=> {
     filters.searchText = e.target.value;
     renderNotes(notes, filters);
 })
 
-document.querySelector('#for-fun').addEventListener('change', function(e){
+document.querySelector('#for-fun').addEventListener('change', (e)=>{
     e.target.checked 
 });
 
-document.querySelector('#filter-by').addEventListener('change', function(e){
+document.querySelector('#filter-by').addEventListener('change', (e)=>{
    //console.log(e.target.value);
    filters.sortBy = e.target.value;
    renderNotes(notes, filters);
 });
-/*document.querySelector('#name-form').addEventListener('submit', function(e){
+/*document.querySelector('#name-form').addEventListener('submit', (e)=>{
     e.preventDefault(); //stops the form default behavior
     //dom element for the input use the name attribute to get value
     console.log(e.target.elements.firstName.value);
@@ -148,7 +148,7 @@ document.querySelector('#filter-by').addEventListener('change', function(e){
     e.target.elements.firstName.value = '';
 });*/
 
-window.addEventListener('storage', function (e) {
+window.addEventListener('storage', (e) => {
     if (e.key === 'notes'){
         notes = JSON.parse(e.newValue);
         renderNotes(notes,filters); 
@@ -214,7 +214,7 @@ console.log(now.fromNow())
 const nowTimeStamp = now.valueOf();
 console.log(moment(nowTimeStamp).toString());
 */
-
+/*
 //BDay moment
 const bday = moment();
 
@@ -222,3 +222,4 @@ bday.year(1960);
 bday.month("Aug");
 bday.set('date',18);
 console.log(bday.format('dddd, MMM D, YYYY'))
+*/
