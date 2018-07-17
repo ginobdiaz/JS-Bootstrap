@@ -1,3 +1,5 @@
+'use strict'
+
 // 1. Add a DOM element between the title and body inputs (empty span)
 // 2. Set text value:(ie, last edited 4 hours ago)
 // 3. Update value on title/body/storage change
@@ -10,7 +12,8 @@ let notes = getSavedNotes();
 const note = notes.find((note)=>note.id === noteID);
 
 
-if (note === undefined){
+//if (note === undefined){
+if (!note){
     location.assign('/index.html')
 }
 
@@ -42,12 +45,11 @@ document.querySelector('#remove-note').addEventListener('click', (e)=>{
 window.addEventListener('storage', (e)=>{
     if (e.key === 'notes'){
         notes = JSON.parse(e.newValue)
-        const note = notes.find(function (note) {
-            return note.id === noteID
-        })
+        const note = notes.find( (note)=> note.id === noteID
+    )
 
 
-        if (note === undefined) {
+        if (!note) {
             location.assign('/index.html')
         }
 

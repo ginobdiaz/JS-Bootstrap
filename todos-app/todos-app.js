@@ -1,3 +1,5 @@
+'use strict'
+
 // DOM - Document Object Model
 
 /* const todos = [{
@@ -68,24 +70,24 @@ const replaceTodo = {
 document.querySelector('#replace-todo').value = '';
 renderTodos(todos, filters);
 
-document.querySelector('#search-todo').addEventListener('input', function(e){
+document.querySelector('#search-todo').addEventListener('input', (e)=>{
         filters.searchText = e.target.value;
         document.querySelector('#replace-todo').value = '';
         renderTodos(todos, filters);
 });
 
-document.querySelector('#replace-todo').addEventListener('input', function (e) {
+document.querySelector('#replace-todo').addEventListener('input', (e)=> {
         replaceTodo.replaceText = e.target.value;
 });
 
-document.querySelector('#focus-todo').addEventListener('input', function (e) {
+document.querySelector('#focus-todo').addEventListener('input', (e)=> {
     if (e.target.value.length === 0) resetTodoInput();
 });
 /* document.querySelector('#submit-todo').addEventListener('click', function (e) {
     editReplaceTodo(todos, replaceTodo);
 }) */
 
-document.querySelector('#todo-form').addEventListener('submit', function(e){
+document.querySelector('#todo-form').addEventListener('submit', (e)=>{
     //prevents query type calls.
     e.preventDefault();
     //checks which button was run
@@ -99,7 +101,7 @@ document.querySelector('#todo-form').addEventListener('submit', function(e){
     }
 });
 
-document.querySelector('#still-todo').addEventListener('change', function(e){
+document.querySelector('#still-todo').addEventListener('change', (e)=>{
     filters.hideCompleted =  e.target.checked;   //document.querySelector('#still-todo').checked;
     renderTodos(todos, filters);
 });

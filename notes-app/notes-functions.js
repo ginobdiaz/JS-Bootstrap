@@ -1,14 +1,26 @@
 //console.log(uuidv4())
+'use strict'  //basically must define variables.
+
+let data;
+const processData = () =>{
+    data = '12382932345'; // missing let or const leaked variable - creates a global
+}
+processData();
+console.log(data)
+
 
 // Check for existing saved data
 const getSavedNotes = () => {
     const notesJSON = localStorage.getItem('notes');
 
-    if (notesJSON !== null){
-        return JSON.parse(notesJSON);
-    }else{
-        return [];
+    try{
+        return (notesJSON) ? JSON.parse(notesJSON) : [];
+    }catch (e){
+        return []
     }
+
+
+//    return (notesJSON !== null) ? JSON.parse(notesJSON) : [];
 }
 
 // Generate the DOM structure for notes
@@ -27,11 +39,7 @@ const generateNoteDOM = (note)=>{
     })
     noteEl.appendChild(button);
     // Setup the note title text
-    if (note.title.length > 0){
-        textEl.textContent = note.title;
-    }else{
-        textEl.textContent= 'Unnamed note'
-    }
+    textEl.textContent = (note.title.length > 0) ? note.title : 'Unnamed note';
 
     //do before paragraph content
     noteEl.appendChild(textEl);
