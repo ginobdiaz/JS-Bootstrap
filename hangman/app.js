@@ -57,9 +57,18 @@ window.addEventListener('keypress',  (e) => {
 
 });
 
+getPuzzle((error, puzzle) => {
+    if (error){
+        console.log(`Error: ${error}`)
+    }else{
+        console.log(puzzle)
+    }
+    
+})
+
 
 // Making an HTTP request
-const request = new XMLHttpRequest();
+/*const request = new XMLHttpRequest();
 
 request.addEventListener('readystatechange', (e) => {
     if (e.target.readyState === 4 && e.target.status === 200){
@@ -89,4 +98,4 @@ req.addEventListener('readystatechange', (e) => {
 
 
 req.open('GET','https://restcountries.eu/rest/v2/all')
-req.send();
+req.send();*/
