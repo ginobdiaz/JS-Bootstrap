@@ -57,6 +57,15 @@ window.addEventListener('keypress',  (e) => {
 
 });
 
+getWord((error, words) => {
+    if (error){
+        console.log(`Error: ${error}`)
+    } else {
+        console.log(words[8])
+    }
+})
+
+/*
 getPuzzle((error, puzzle) => {
     if (error){
         console.log(`Error: ${error}`)
@@ -65,7 +74,7 @@ getPuzzle((error, puzzle) => {
     }
     
 })
-
+*/
 
 // Making an HTTP request
 /*const request = new XMLHttpRequest();
