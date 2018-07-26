@@ -71,6 +71,12 @@ window.addEventListener('keypress',  (e) => {
 
 const getRanIndex = (maxNum) => Math.floor(Math.random() * (maxNum - 0)) 
 
+//pass two functions, 1 when request is resolve and 2nd if request is rejected
+getPuzzle('2').then((puzzle) => {
+    console.log(puzzle)
+}, (err) =>{
+    console.log(`Error: ${err}`)
+})
 /*
 getPuzzle((error, puzzle) => {
     if (error){
