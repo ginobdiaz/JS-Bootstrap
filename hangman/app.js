@@ -32,7 +32,19 @@ console.log(product.hasOwnPropery())
 // Response - what was actually done.
 
 //const h1 = new hangman('spinach', 10);
-const h2 = new Hangman('bat boy', 5);
+//const h2 = new Hangman('bat boy', 5);
+/*
+const idx = 0;
+getWord((error, words) => {
+    if (error){
+        console.log(`Error: ${error}`)
+    } else {
+        idx = getRanIndex(words.length)
+        console.log(words[idx])
+    }
+})
+const h2 = new hangman(words[idx], 5); 
+*/
 /*console.log(h2.guessCharacter('e'));
 console.log(h2.guessCharacter('r'));
 console.log(h2.guessCharacter('t'));
@@ -44,9 +56,9 @@ console.log(h2.getPuzzle())
 //DOM Elements
 const theWord = document.querySelector('#theWord');
 //Events
-document.addEventListener('DOMContentLoaded', function (e){
+/*document.addEventListener('DOMContentLoaded', function (e){
     theWord.innerHTML = h2.theWord();
-})
+})*/
 window.addEventListener('keypress',  (e) => {
     const guess = String.fromCharCode(e.charCode);
     //console.log(h2.guessCharacter(guess))
@@ -57,13 +69,7 @@ window.addEventListener('keypress',  (e) => {
 
 });
 
-getWord((error, words) => {
-    if (error){
-        console.log(`Error: ${error}`)
-    } else {
-        console.log(words[8])
-    }
-})
+const getRanIndex = (maxNum) => Math.floor(Math.random() * (maxNum - 0)) 
 
 /*
 getPuzzle((error, puzzle) => {
@@ -74,10 +80,18 @@ getPuzzle((error, puzzle) => {
     }
     
 })
+
+//const puzzle = getPuzzleSync()
+console.log(puzzle)
+
+console.log('Do something else!')
 */
 
+
+/*
+//const h2 = new Hangman('bat boy', 5);
 // Making an HTTP request
-/*const request = new XMLHttpRequest();
+const request = new XMLHttpRequest();
 
 request.addEventListener('readystatechange', (e) => {
     if (e.target.readyState === 4 && e.target.status === 200){
@@ -90,11 +104,26 @@ request.addEventListener('readystatechange', (e) => {
 
 request.open('GET','http://puzzle.mead.io/puzzle?wordCount=3')
 request.send(); 
+*/
 
-const countryCode = "us"
+// 1. Create a new function for getting country details
+// 2. Call it with two arguments: country code and the callback function
+// 3. Make a HTTP request and call the callback with country information
+// 4. Use the callback to print the country name.
 
+const countryCode = "ch"
+getCountryInfo(countryCode, (error, country) => {
+    if (error){
+        console.log(`Error: ${error}`)
+    }else{
+        console.log(country)
+    }
+    
+})
+
+
+/*
 const req = new XMLHttpRequest();
-
 req.addEventListener('readystatechange', (e) => {
     if (e.target.readyState == 4 && e.target.status === 200){
         const nations = JSON.parse(e.target.responseText);
