@@ -71,12 +71,18 @@ window.addEventListener('keypress',  (e) => {
 
 const getRanIndex = (maxNum) => Math.floor(Math.random() * (maxNum - 0)) 
 
-//pass two functions, 1 when request is resolve and 2nd if request is rejected
+getPuzzle('2').then((puzzle) => {
+    console.log(puzzle)
+}).catch((err) => {
+    console.log(`Error: ${err}`)
+})
+/*
+//passes two functions, 1 when request is resolve and 2nd if request is rejected
 getPuzzle('2').then((puzzle) => {
     console.log(puzzle)
 }, (err) =>{
     console.log(`Error: ${err}`)
-})
+})*/
 /*
 getPuzzle((error, puzzle) => {
     if (error){
@@ -112,11 +118,11 @@ request.open('GET','http://puzzle.mead.io/puzzle?wordCount=3')
 request.send(); 
 */
 
+/*
 // 1. Create a new function for getting country details
 // 2. Call it with two arguments: country code and the callback function
 // 3. Make a HTTP request and call the callback with country information
 // 4. Use the callback to print the country name.
-
 const countryCode = "ch"
 getCountryInfo(countryCode, (error, country) => {
     if (error){
@@ -125,7 +131,24 @@ getCountryInfo(countryCode, (error, country) => {
         console.log(country)
     }
     
+})*/
+
+// 1. Convert getCountry to use 'fetch' and return a 'promise'
+// 2. Make sure getCountry still resolves with the country that matches
+// 3. Change error to use 'catch'
+getCountryInfo('ar').then((country) => {
+    console.log(country)   
+}).catch((error)=>{
+    console.log(`ERROR: ${error}`)
 })
+/*
+// 1. Convert getCountry to return a new promise
+// 2. Call getCountry to print country name or error.
+getCountryInfo('pm').then((country) => {
+    console.log(country)
+}, (error) =>{
+    console.log(error)
+})*/
 
 
 /*
@@ -143,3 +166,18 @@ req.addEventListener('readystatechange', (e) => {
 
 req.open('GET','https://restcountries.eu/rest/v2/all')
 req.send();*/
+
+/*
+//When fetch returns you can get a 'Promise' to do something for 
+//  our request. The fetch will only return when the readystate is ready.
+fetch('http://puzzle.mead.io/puzzle',{}).then((response)=>{
+    if (response.status === 200){
+        return response.json()
+    }else{      //<<<for rejections
+        throw new Error('Unable to fetch the puzzle')   //<<<the 'throw' will make 'catch' work.
+    }
+}).then((data)=>{
+    console.log(data.puzzle)
+}).catch((error)=>{
+    console.log(error)
+})*/
