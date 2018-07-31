@@ -181,3 +181,20 @@ fetch('http://puzzle.mead.io/puzzle',{}).then((response)=>{
 }).catch((error)=>{
     console.log(error)
 })*/
+
+// 1. Create getLocation function which takes no request
+// 2. Setup getLocation to make a request to the url and parse the data
+// 3. Use getLocation to print the city, region and country information
+getLocation('05602ce1f62587').then((locdata)=>{
+    console.log(`City: ${locdata.city}`);
+    console.log(`Region: ${locdata.region}`);
+    console.log(`Country: ${locdata.country}`);
+}).catch((error)=>{
+    console.log(`Error: ${error}`)
+})
+
+getCountryFromIP('05602ce1f62587').then((country) => {
+    console.log(`This IP found in this country: ${country}`)
+}).catch((error)=>{
+    console.log(`Error: ${error}`)
+})

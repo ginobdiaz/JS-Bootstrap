@@ -132,4 +132,22 @@ const getCountryInfo = (countryCode) => new Promise((resolve, reject)=> {
 } */
 
 
+// ipinfo.io/json?token=05602ce1f62587
+const getLocation = (token) => {
+    return fetch(`http://ipinfo.io/json?token=${token}`).then((response) =>{
+        if (response.status === 200){
+            return response.json()
+        }else{
+            throw new Error('Couldn\'t get to ipinfo.io')
+        }
+    })
+}
 
+const getCountryFromIP = (token) => new Promise((resolve, reject) => { 
+    return resolve() ? getLocation(token) : reject('Not Good!')
+
+ }).then((data) =>{
+    return getCountryInfo(data.country)
+}).then((country)=> {
+    return country.name
+}).catch((err)=> {throw err} )
