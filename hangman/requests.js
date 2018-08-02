@@ -143,6 +143,7 @@ const getLocation = (token) => {
     })
 }
 
+<<<<<<< HEAD
 const getCountryFromIP = (token) => new Promise((resolve, reject) => { 
     return resolve() ? getLocation(token) : reject('Not Good!')
 
@@ -151,3 +152,14 @@ const getCountryFromIP = (token) => new Promise((resolve, reject) => {
 }).then((country)=> {
     return country.name
 }).catch((err)=> {throw err} )
+=======
+
+const getCountryFromIP = (token) => { 
+    return getLocation(token).then((data)=>{
+        return getCountryInfo(data.country)
+    }).catch((err) => {
+        //console.log(err)
+        throw new Error('Couldn\'t get country name.')
+    })
+}
+>>>>>>> lecture 117

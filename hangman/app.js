@@ -194,7 +194,25 @@ getLocation('05602ce1f62587').then((locdata)=>{
 })
 
 getCountryFromIP('05602ce1f62587').then((country) => {
+<<<<<<< HEAD
     console.log(`This IP found in this country: ${country}`)
 }).catch((error)=>{
     console.log(`Error: ${error}`)
 })
+=======
+    console.log(`This IP found in this country: ${country.name}`)
+}).catch((error)=>{
+    console.log(`Error: ${error}`)
+})
+
+/* Course solution
+getLocation().then((location) =>{
+    return getCountry(location.country)
+}).then((country) =>{
+    console.log(country.code)
+}).catch((err) => {
+    console.log(`Error: ${err}`)    
+})
+
+*/ 
+>>>>>>> lecture 117
