@@ -134,7 +134,7 @@ const getCountryInfo = (countryCode) => new Promise((resolve, reject)=> {
 
 // ipinfo.io/json?token=05602ce1f62587
 const getLocation = (token) => {
-    return fetch(`http://ipinfo.io/json?token=${token}`).then((response) =>{
+    return fetch(`http://ipinfo.io/json?toksen=${token}`).then((response) =>{
         if (response.status === 200){
             return response.json()
         }else{
@@ -142,17 +142,6 @@ const getLocation = (token) => {
         }
     })
 }
-
-<<<<<<< HEAD
-const getCountryFromIP = (token) => new Promise((resolve, reject) => { 
-    return resolve() ? getLocation(token) : reject('Not Good!')
-
- }).then((data) =>{
-    return getCountryInfo(data.country)
-}).then((country)=> {
-    return country.name
-}).catch((err)=> {throw err} )
-=======
 
 const getCountryFromIP = (token) => { 
     return getLocation(token).then((data)=>{
@@ -162,4 +151,4 @@ const getCountryFromIP = (token) => {
         throw new Error('Couldn\'t get country name.')
     })
 }
->>>>>>> lecture 117
+
