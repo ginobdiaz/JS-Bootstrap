@@ -77,7 +77,7 @@ const getCountryInfo = (countryCode, callback) => {
 
 //With Promises
 const getPuzzle = async (wordCount)=>{
-    const response = await  fetch(`http://puzzle.mead.io/puzzle?wordCount=${wordCount}`)
+    const response = await  fetch(`//puzzle.mead.io/puzzle?wordCount=${wordCount}`)
 
     if (response.status === 200){
         const data = await response.json()
@@ -87,6 +87,7 @@ const getPuzzle = async (wordCount)=>{
     }
 }
 
+/*
 const getPuzzleOld = (wordCount)=>{
     // the return, returns a promise
     return fetch(`http://puzzle.mead.io/puzzle?wordCount=${wordCount}`).then((response)=>{
@@ -98,7 +99,7 @@ const getPuzzleOld = (wordCount)=>{
     }).then((data)=>{    //<<<this 'then' runs once the return response.json() gets resolved
         return data.puzzle
     })
-}
+}/*
 
 /*
 const getCountryInfo = (countryCode)=>{
@@ -192,7 +193,7 @@ const getCountryInfo = async (countryCode)=>  {
 }
 // ipinfo.io/json?token=05602ce1f62587
 const getLocation = async () => {
-    const response = await  fetch(`http://ipinfo.io/json?token=05602ce1f62587`)
+    const response = await  fetch(`//ipinfo.io/json?token=05602ce1f62587`)
 
     if (response.status === 200){
         const loc = await response.json()
