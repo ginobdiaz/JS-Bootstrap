@@ -71,13 +71,13 @@ document.querySelector('#replace-todo').value = '';
 renderTodos(todos, filters);
 
 document.querySelector('#search-todo').addEventListener('input', (e)=>{
-        filters.searchText = e.target.value;
+        filters.searchText = e.target.value.trim();
         document.querySelector('#replace-todo').value = '';
         renderTodos(todos, filters);
 });
 
 document.querySelector('#replace-todo').addEventListener('input', (e)=> {
-        replaceTodo.replaceText = e.target.value;
+    replaceTodo.replaceText = e.target.value;
 });
 
 document.querySelector('#focus-todo').addEventListener('input', (e)=> {
@@ -90,11 +90,16 @@ document.querySelector('#focus-todo').addEventListener('input', (e)=> {
 document.querySelector('#todo-form').addEventListener('submit', (e)=>{
     //prevents query type calls.
     e.preventDefault();
+   
     //checks which button was run
     const isAdd = (document.querySelector('#submit-todo').innerHTML.toLowerCase().includes('update')) ? false : true;
-    replaceTodo.replaceText = document.querySelector('#focus-todo').value;
+    replaceTodo.replaceText = document.querySelector('#focus-todo').value.trim();
     replaceTodo.isDone = document.querySelector('#edit-done').checked;
     if (isAdd){
+        if (replaceTodo.replaceText === undefined || replaceTodo.replaceText.length === 0){
+            alert('You must input a To-Do item!')
+            return;
+        }
         addReplaceTodo(todos, replaceTodo);
     }else{
         editReplaceTodo(todos, replaceTodo)

@@ -3,40 +3,51 @@
 <head>
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>Page Title</title>
+    <title>Notes App</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="/images/favicon.png" rel="icon">
+    <link href="/styles/styles.css" rel="stylesheet">
 <!--     <script>
         //console.log('This is from my HTML document.')
     </script> -->
 </head>
 <body title="Notes App">
-    <h1>Notes App</h1>
-    <h2>Take notes and never forget</h2>
-    <input type="text" id="search-text" placeholder="filter notes">
-<!--     <p>He SCORES!!!</p>
-    <p class="note">GOOOALLLLLLLLLLL!!!</p>
-    <div><button>Hit Me</button></div> -->
-    <select id="filter-by">
-        <option value="byEdited">Sort by last edited</option>
-        <option value="byCreated">Sort by recently created</option>
-        <option value="byAlpha">Sort alphabetically</option>
-    </select>
-    <div id="notes">
+    <header class="header">
+        <div class="container">
+                <h1 class="header__title">Notes App</h1>
+                <h2 class="header__subtitle">Take notes and never forget</h2>            
+        </div>
+    </header>
+    <div class="actions">
+        <div class="actions__container">
+            <input type="text" id="search-text" class="input" placeholder="filter notes">
+            <!--     <p>He SCORES!!!</p>
+                <p class="note">GOOOALLLLLLLLLLL!!!</p>
+                <div><button>Hit Me</button></div> -->
+                <select id="filter-by" class="dropdown">
+                    <option value="byEdited">Sort by last edited</option>
+                    <option value="byCreated">Sort by recently created</option>
+                    <option value="byAlpha">Sort alphabetically</option>
+                </select>                
+        </div>
+    </div>    
 
-    </div>
-    <div><button id="create-note">Create Note</button></div>
+    <div class="container">
+        <div id="notes"></div>    
+        <button id="create-note" class="button">Create Note</button></div>
 <!--     <div><button id="remove-notes">Remove All Todos</button></div> -->
 <!--     <form id="name-form">
         <input type="text" placeholder="First name" name="firstName">
         <button>Submit</button>
     </form> -->
-    <label><input id="for-fun" type="checkbox"/>Check me for fun.
-    </lable>
+        <label><input id="for-fun" type="checkbox"/>Check me for fun.
+        </label>
+    </div>
 <!--     <script src="http://wzrd.in/standalone/uuid%2Fv4@latest"></script> -->
-    <script src="uuidv4raw.js"></script>
+    <script src="/scripts/uuidv4.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.22.2/moment-with-locales.min.js"></script>
-    <script src="notes-functions.js"></script>
-    <script src="notes-app.js"></script>
+    <script src="/scripts/notes-functions.js"></script>
+    <script src="/scripts/notes-app.js"></script>
 
 </body>
 </html>`

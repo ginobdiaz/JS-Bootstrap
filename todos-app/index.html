@@ -3,33 +3,51 @@
 <head>
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>Page Title</title>
+    <title>To-do App</title>
+    <link href="/images/favicon.png?updt" rel="icon">
+    <link href="/styles/styles.css" rel="stylesheet">
     <meta name="viewport" content="width=device-width, initial-scale=1">
    
 </head>
 <body>
-    <h1>TODO</h1>
-    <h2>I Live By My Todos!</h2>
-    <div><input type="text" id="search-todo" placeholder="search todo"/></div>
-    <div><input type="text" id="focus2-todo" readonly=true placeholder="edit this todo"/><input type="text" id="replace-todo" placeholder="replace todo with"/><button id="button-replace-todo">Replace Todo</button></div>
-    
-    <div id="todo-list">
-
+    <div class="header">
+        <div class="container">
+            <h1 class="header__title">TODO App</h1>
+            <h2 class="header__subtitle">I Live By My Todos!</h2>
+        </div>
     </div>
-    <div style="margin-bottom: 1.5rem;">
-        <h3 id="count-todos"></h3>
-        <label><input id="still-todo" type="checkbox"/>View Incomplete Todos
-        </lable>
-    </div> 
-    <!-- style="display: none;" -->
-    <form id="todo-form">
-        <div><input type="text" id="focus-todo" name="update-todo" placeholder="new todo"/>
-        <input type="checkbox" id="edit-done" name="is-done" value="0">Completed<br></div>
-        <div style="margin-top: 10px;"><button id="submit-todo">Add Todo</button></div>
-    </form>
+    <div class="actions ">
+        <div class="actions__containter container">
+                <input type="text" class="input" id="search-todo" placeholder="search todo"/>
+                
+                    <input type="text" class="input" id="focus2-todo" readonly=true placeholder="edit this todo"/>
+                    <input type="text" id="replace-todo" placeholder="replace todo with"/>
+                     <button id="button-replace-todo">Replace Todo</button>
+                
+                
+               
+        </div>
+    </div>
+    <div class="container">
+
+
+        <div style="margin-bottom: 1.5rem;">
+            <h3 id="count-todos"></h3>
+            <label><input id="still-todo" type="checkbox"/>View Incomplete Todos
+            </lable>
+        </div> 
+        <div id="todo-list"></div>
+        <!-- style="display: none;" -->
+        <form id="todo-form">
+            <div><input type="text" class="input" id="focus-todo" name="update-todo" placeholder="new todo"/>
+            <input type="checkbox" class="input" id="edit-done" name="is-done" value="0">Completed<br></div>
+            <div style="margin-top: 10px;"><button class="button" id="submit-todo">Add Todo</button></div>
+        </form>
+    </div>
+
     <!-- <div><button id="add-todo">Test TODO</button></div> -->
-    <script src="uuidv4raw.js"></script>    
-    <script src="todos-functions.js"></script>    
-    <script src="todos-app.js"></script>    
+    <script src="/scripts/uuidv4.js"></script>    
+    <script src="/scripts/todos-functions.js"></script>    
+    <script src="/scripts/todos-app.js"></script>    
 </body>
 </html>

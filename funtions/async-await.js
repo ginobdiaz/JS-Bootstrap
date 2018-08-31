@@ -10,7 +10,7 @@ const processData = async () => {
     //throw new Error('What\'s wrong')
     //return 12
     let data = await getDataPromise(2)
-    //chaining going on here:
+    //promise chaining going on here:
     data = await getDataPromise(data)
     data = await getDataPromise(data)
     data = await getDataPromise(data)

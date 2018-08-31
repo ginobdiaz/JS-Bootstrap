@@ -76,7 +76,18 @@ const getCountryInfo = (countryCode, callback) => {
 }*/
 
 //With Promises
-const getPuzzle = (wordCount)=>{
+const getPuzzle = async (wordCount)=>{
+    const response = await  fetch(`http://puzzle.mead.io/puzzle?wordCount=${wordCount}`)
+
+    if (response.status === 200){
+        const data = await response.json()
+        return data.puzzle
+    }else{
+        throw new Error('Unable to get puzzle')
+    }
+}
+
+const getPuzzleOld = (wordCount)=>{
     // the return, returns a promise
     return fetch(`http://puzzle.mead.io/puzzle?wordCount=${wordCount}`).then((response)=>{
         if (response.status === 200){
@@ -88,6 +99,8 @@ const getPuzzle = (wordCount)=>{
         return data.puzzle
     })
 }
+
+/*
 const getCountryInfo = (countryCode)=>{
     return fetch('https://restcountries.eu/rest/v2/all').then((response)=>{
         if (response.status === 200){
@@ -97,10 +110,12 @@ const getCountryInfo = (countryCode)=>{
         }
     }).then((countries)=> countries.find((nation)=> nation.alpha2Code === countryCode.toUpperCase()))
 
-    /*  or do it this way>>>   }).then((countries)=>{
-        return countries.find((nation)=> nation.alpha2Code === countryCode.toUpperCase()) 
-    })*/
-}
+    //  or do it this way>>>   }).then((countries)=>{
+    //    return countries.find((nation)=> nation.alpha2Code === countryCode.toUpperCase()) 
+    //})
+
+}*/
+
 /*
 const getCountryInfo = (countryCode) => new Promise((resolve, reject)=> {
     const reqCountry = new XMLHttpRequest();
@@ -131,7 +146,17 @@ const getCountryInfo = (countryCode) => new Promise((resolve, reject)=> {
         }
 } */
 
-
+// 1. Convert getCountryInfo to an async function that uses await
+// 2. Convert getLocation to an async function that uses await
+/*const getCountryInfo = (countryCode)=>{
+    return fetch('https://restcountries.eu/rest/v2/all').then((response)=>{
+        if (response.status === 200){
+            return response.json()
+        }else{
+            throw new Error('Failed to Fetch a country')
+        }
+    }).then((countries)=> countries.find((nation)=> nation.alpha2Code === countryCode.toUpperCase()))
+}
 // ipinfo.io/json?token=05602ce1f62587
 const getLocation = (token) => {
     return fetch(`http://ipinfo.io/json?toksen=${token}`).then((response) =>{
@@ -152,3 +177,39 @@ const getCountryFromIP = (token) => {
     })
 }
 
+*/
+
+const getCountryInfo = async (countryCode)=>  {
+    const response = await fetch('https://restcountries.eu/rest/v2/all')
+    
+    if (response.status === 200){
+        const countries = await response.json()
+        return countries.find((nation)=> nation.alpha2Code === countryCode.toUpperCase())
+    }else{
+        throw new Error('Failed to Fetch a country')
+    }
+    
+}
+// ipinfo.io/json?token=05602ce1f62587
+const getLocation = async () => {
+    const response = await  fetch(`http://ipinfo.io/json?token=05602ce1f62587`)
+
+    if (response.status === 200){
+        const loc = await response.json()
+        return loc
+    }else{
+        throw new Error('Couldn\'t get to ipinfo.io')
+    }
+    
+}
+
+/*
+// Create a new function called getCurrentCountry
+// Should return a promise that resolves the country object for your current location
+// Use async/await for the new function
+const getCurrentCountry = async () => {
+    const data = await getLocation()
+    const country = await getCountryInfo(data.country)
+    //return the country name
+    return country.name
+}*/

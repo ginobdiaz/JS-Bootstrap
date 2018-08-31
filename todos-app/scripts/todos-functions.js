@@ -33,43 +33,58 @@ const renderTodos = (todos, filters) => {
     );
 
     document.querySelector('#todo-list').innerHTML = '';
+    const statusMsgEL = document.querySelector('#count-todos')
+    statusMsgEL.classList.add('list-title')
+    statusMsgEL.innerHTML = `There ${(filterTodos.length > 1) ? 'are' : 'is'} ${filterTodos.length} ${(filterTodos.length > 1) ? 'todos' : 'todo'}.`
+
     if (filterTodos.length === 1) {
         replaceTodo.wasText = filterTodos[0].todo  //todo.todo;        
         document.querySelector('#focus-todo').value = filterTodos[0].todo  //todo.todo;        
         document.querySelector('#edit-done').checked = filterTodos[0].isDone;
         document.querySelector('#submit-todo').innerHTML = 'Update Todo';
-    } else {
+    } else if (filterTodos.length === 0 ) {
+        const emptyEL = document.createElement('p')
+        emptyEL.textContent = 'There are no TO-DO\'s. Click on add button to create one.'
+        document.querySelector('#todo-list').appendChild(emptyEL);
         resetTodoInput();
+        return;
     }
+
     filterTodos.forEach( (todo) => {
-        const todoEl = document.createElement('div');
-
-        //remove button
-        const btnDelEl = document.createElement('button');
-        btnDelEl.textContent = 'X';
-        todoEl.appendChild(btnDelEl);
-        btnDelEl.addEventListener('click', ()=>{
-            removeTodo(todo.id);
-            saveTodos(todos);
-            renderTodos(todos, filters);
-        })
-
-        //todo box 
-        const textEl = document.createElement('span');
-        textEl.textContent = todo.todo.concat((todo.isDone) ? ' *' : '');
-        todoEl.appendChild(textEl);
+        const todoEl = document.createElement('label');
+        const containerEl = document.createElement('div');
 
         //check box 
         const chkbxEl = document.createElement('input');
         chkbxEl.setAttribute('type', 'checkbox');
         chkbxEl.checked = todo.isDone;
-        todoEl.appendChild(chkbxEl);
+        containerEl.appendChild(chkbxEl);
         chkbxEl.addEventListener('change', () =>{
             checkDoneTodo(todo.id);
             saveTodos(todos);
             renderTodos(todos, filters);
         });
 
+        //todo text box 
+        const textEl = document.createElement('span');
+        textEl.textContent = todo.todo.concat((todo.isDone) ? ' *' : '');
+        containerEl.appendChild(textEl);
+
+        //setup container
+        todoEl.classList.add('list-item')
+        containerEl.classList.add('list-item__container')
+        todoEl.appendChild(containerEl)
+
+        //remove button
+        const btnDelEl = document.createElement('button');
+        btnDelEl.textContent = 'remove';
+        btnDelEl.classList.add('button','button--text')
+        todoEl.appendChild(btnDelEl);
+        btnDelEl.addEventListener('click', ()=>{
+            removeTodo(todo.id);
+            saveTodos(todos);
+            renderTodos(todos, filters);
+        })
 
         /*if (filters.hideCompleted){
               if (!todo.isDone)
@@ -79,7 +94,6 @@ const renderTodos = (todos, filters) => {
           } */
         document.querySelector('#todo-list').appendChild(todoEl);
     })
-    document.querySelector('#count-todos').innerHTML = `There ${(filterTodos.length > 1) ? 'are' : 'is'} ${filterTodos.length} ${(filterTodos.length > 1) ? 'todos' : 'todo'}.`
 } 
 
 const editReplaceTodo =  (todos, replaceTodo)=> {
@@ -99,7 +113,7 @@ const editReplaceTodo =  (todos, replaceTodo)=> {
 }
 
 const addReplaceTodo = (todos, replaceTodo) =>{
-    const newTodo = { id: uuidv4(), todo: replaceTodo.replaceText, isDone: replaceTodo.isDone }
+    const newTodo = { id: uuidv4(), todo: replaceTodo.replaceText.trim(), isDone: replaceTodo.isDone }
     todos.push(newTodo);
     filters.searchText = '';
     document.querySelector('#focus-todo').value = '';

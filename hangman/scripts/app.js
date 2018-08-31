@@ -55,6 +55,9 @@ console.log(h2.getPuzzle())
 //console.log(h2)
 //DOM Elements
 const theWord = document.querySelector('#theWord');
+const theMessage = document.querySelector('#theMessage');
+const theStatus = document.querySelector('#theStatus');
+let game1
 //Events
 /*document.addEventListener('DOMContentLoaded', function (e){
     theWord.innerHTML = h2.theWord();
@@ -62,20 +65,53 @@ const theWord = document.querySelector('#theWord');
 window.addEventListener('keypress',  (e) => {
     const guess = String.fromCharCode(e.charCode);
     //console.log(h2.guessCharacter(guess))
+    /*
     console.log(h2.Puzzle);
     document.querySelector('#theMessage').innerHTML = h2.guessCharacter(guess)
     theWord.innerHTML = h2.Puzzle
-    document.querySelector('#theStatus').innerHTML = h2.Guesses
+    theStatus.innerHTML = h2.Guesses
+    */
+   game1.guessCharacter(guess)
+   render()
+   console.log(game1.GameStatus)
+   console.log(game1.Puzzle)
+
 
 });
 
+
+const render = () => {
+    //game1.puzzle ->"*** ****"
+    theWord.innerHTML = ''
+    game1.Puzzle.split('').forEach((letter) =>{
+        const letterEl = document.createElement('span')
+        letterEl.textContent = letter
+        theWord.appendChild(letterEl)
+        
+    })
+    theMessage.innerHTML = game1.GameMessage
+    theStatus.innerHTML = game1.GameStatus
+    
+}
+
 const getRanIndex = (maxNum) => Math.floor(Math.random() * (maxNum - 0)) 
 
-getPuzzle('2').then((puzzle) => {
+/*getPuzzle('1').then((puzzle) => {
     console.log(puzzle)
 }).catch((err) => {
     console.log(`Error: ${err}`)
-})
+})*/
+
+const startGame = async () => {
+    const puzzle = await getPuzzle('2')
+    game1 = new Hangman(puzzle, 5);
+    document.title = game1.theWordMasked
+    console.log(game1.TheWord)
+    render()
+}
+
+document.querySelector('#reset').addEventListener('click', startGame)
+startGame()
 /*
 //passes two functions, 1 when request is resolve and 2nd if request is rejected
 getPuzzle('2').then((puzzle) => {
@@ -182,9 +218,11 @@ fetch('http://puzzle.mead.io/puzzle',{}).then((response)=>{
     console.log(error)
 })*/
 
+
 // 1. Create getLocation function which takes no request
 // 2. Setup getLocation to make a request to the url and parse the data
 // 3. Use getLocation to print the city, region and country information
+/* My initial solution:
 getLocation('05602ce1f62587').then((locdata)=>{
     console.log(`City: ${locdata.city}`);
     console.log(`Region: ${locdata.region}`);
@@ -197,7 +235,7 @@ getCountryFromIP('05602ce1f62587').then((country) => {
     console.log(`This IP found in this country: ${country.name}`)
 }).catch((error)=>{
     console.log(`Error: ${error}`)
-})
+})*/
 
 /* Course solution
 getLocation().then((location) =>{
@@ -209,4 +247,11 @@ getLocation().then((location) =>{
 })
 
 */ 
+
+/*
+getCurrentCountry().then((country)=>{
+    console.log(country)
+}).catch((err) =>{
+    console.log(`Error: ${err}`)
+})*/
 
